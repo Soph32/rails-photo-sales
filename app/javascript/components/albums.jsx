@@ -39,9 +39,9 @@ function AlbumsTable() {
             <table>
                 <tbody>
                     <tr>
+                        <th>Thumbnail</th>
                         <th>Title</th>
                         <th>Owner</th>
-                        <th>Thumbnail</th>
                     </tr>
                     {rows}
                 </tbody>
@@ -52,19 +52,24 @@ function AlbumsTable() {
 
 function AlbumsRow(props) {
     const [photos, setPhotos] = useState();
+    const [user, setUser] = useState();
 
     useEffect(() => {
         fetch("http://localhost:3000/albums/request_photos/" + props.id)
             .then(response => response.json())
             .then(data => setPhotos(data));
+
+        fetch("http://localhost:3000/users/request_user/" + props.owner)
+            .then(response => response.json())
+            .then(data => setUser(data));
     }, []);
 
-    if (photos) {
+    if (photos && user) {
         return (
             <tr>
                 <td><img src={photos[0].thumbnailUrl}></img></td>
                 <td>{props.title}</td>
-                <td>{props.owner}</td>
+                <td>{user.name}</td>
             </tr>
         ) 
     } else {

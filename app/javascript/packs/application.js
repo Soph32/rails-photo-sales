@@ -8,7 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-require("custom/fetchData")
+//require("custom/fetchData")
 
 //= require jquery
 //= require jquery_ujs
@@ -20,4 +20,7 @@ require("custom/fetchData")
 // or the `imagePath` JavaScript helper below.
 //
 // const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+// const imagePath = (name) => images(name, true)// Support component names relative to this directory:
+var componentRequireContext = require.context("components", true);
+var ReactRailsUJS = require("react_ujs");
+ReactRailsUJS.useContext(componentRequireContext);

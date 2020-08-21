@@ -1,6 +1,21 @@
 import React, {useEffect, useState} from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Album from './album';
 
-export default function Albums() {
+export default function App() {
+    return(
+        <div>
+            <Router>
+                <Switch>
+                    <Route path="/albums/" component={Album} />
+                    <Route path="/" component={Albums} />
+                </Switch>
+            </Router>
+        </div>
+    )
+}
+
+function Albums() {
     return (
         <div>
             <h1> Photography Album Selling Company </h1>
@@ -53,7 +68,9 @@ function AlbumsTable() {
 function AlbumsRow(props) {
     const [photos, setPhotos] = useState();
     const [user, setUser] = useState();
-
+    
+    // grab the photos in the album for the thumbnail
+    // and the user for the name
     useEffect(() => {
         fetch("http://localhost:3000/albums/request_photos/" + props.id)
             .then(response => response.json())
@@ -64,13 +81,25 @@ function AlbumsRow(props) {
             .then(data => setUser(data));
     }, []);
 
+    let url = "/albums/" + props.id;
     if (photos && user) {
         return (
-            <tr>
-                <td><img src={photos[0].thumbnailUrl}></img></td>
-                <td>{props.title}</td>
-                <td>{user.name}</td>
-            </tr>
+            <Link to={{
+                pathname: url,
+                state: {
+                    albumId: props.id,
+                    title: props.title,
+                    photos: photos,
+                    user: user
+                }
+            }}
+            >
+                <tr>
+                    <td><img src={photos[0].thumbnailUrl}></img></td>
+                    <td>{props.title}</td>
+                    <td>{user.name}</td>
+                </tr>
+            </Link>
         ) 
     } else {
         return null

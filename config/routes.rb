@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/request_user/:id', to: 'users#request_user'
 
+  get 'albums/:id', to: 'albums#album'
+  get 'url2', to: 'users#user'
+
   root 'albums#index'
 end

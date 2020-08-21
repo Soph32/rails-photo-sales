@@ -4,11 +4,14 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Albums from '../components/albums'
+import { BrowserRouter } from 'react-router-dom'
+import App from '../components/albums'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Albums />,
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
     document.body.appendChild(document.createElement('div')),
   )
 })

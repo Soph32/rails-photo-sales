@@ -2,6 +2,9 @@ class AlbumsController < ApplicationController
   def index
   end
 
+  def album
+  end
+
   def request_albums()
     response = HTTParty.get("https://jsonplaceholder.typicode.com/albums", headers: { "Accept" => "application/json" })
     render json: response.body

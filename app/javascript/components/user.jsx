@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import GoogleMapReact from 'google-map-react';
 
 export default function User(props) {
     const [user, setUser] = useState();
@@ -66,15 +67,6 @@ export default function User(props) {
                             Phone: {user.phone}<br />
                             Website: <a href={website}>{user.website}</a>
                         </div>
-                        <div className="address">
-                            <span className="heading">Address:</span><br/>
-                            Street: {user.address.street}<br/>
-                            Suite: {user.address.suite}<br/>
-                            City: {user.address.city}<br/>
-                            Zipcode: {user.address.zipcode}<br/>
-                            Lat: {user.address.geo.lat}<br/>
-                            Lng: {user.address.geo.lng}
-                        </div>
                         <div className="company">
                             <span className="heading">Company:</span><br/>
                             Name: {user.company.name}<br/>
@@ -82,6 +74,16 @@ export default function User(props) {
                             BS: {user.company.bs}
                         </div>
                     </div>
+                    <div className="address">
+                        <span className="heading">Address:</span><br/>
+                        Street: {user.address.street}<br/>
+                        Suite: {user.address.suite}<br/>
+                        City: {user.address.city}<br/>
+                        Zipcode: {user.address.zipcode}<br/>
+                        Lat: {user.address.geo.lat}<br/>
+                        Lng: {user.address.geo.lng}
+                    </div>
+                    <Map lat={user.address.geo.lat} lng={user.address.geo.lng}/>
                 </div>
                 <div className="albums">
                     <h2>Albums</h2>
@@ -123,6 +125,33 @@ function AlbumLinks(props) {
             > 
                 <div className="album">{props.albumTitle}</div><br />
             </Link>
+        </div>
+    )
+};
+
+function MapLabel(props) {
+    return (
+        <div className="label">{props.text}</div>
+    )
+};
+
+function Map(props) {
+    const [center] = useState({lat: parseFloat(props.lat), lng: parseFloat(props.lng)});
+    const [zoom] = useState(11);
+
+    console.log(center);
+    return (
+        <div className="map">
+            <GoogleMapReact
+                defaultCenter={center}
+                defaultZoom={zoom}
+            >
+                <MapLabel
+                    lat={parseFloat(props.lat)}
+                    lng={parseFloat(props.lng)}
+                    text=""
+                />
+            </GoogleMapReact>
         </div>
     )
 };

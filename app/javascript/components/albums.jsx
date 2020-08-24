@@ -89,31 +89,35 @@ function AlbumsRow(props) {
     if (photos && user) {
         return (
                 <tr>
-                    <Link to={{
-                        pathname: url,
-                        state: {
-                            albumId: props.id,
-                            title: props.title,
-                            photos: photos,
-                            user: user,
-                            albums: props.albums
-                        }
-                        }}
-                    >
-                        <td><img src={photos[0].thumbnailUrl}></img></td>
-                        <td>{props.title}</td>
-                    </Link>
-                    <Link to={{
-                        pathname: url2,
-                        state: {
-                            user: user,
-                            albums: props.albums,
-                            photos: photos
-                        }
-                        }}
-                    >
-                        <td>{user.name}</td>
-                    </Link>
+                    <td><img src={photos[0].thumbnailUrl}></img></td>
+                    <td>
+                        <Link to={{
+                            pathname: url,
+                            state: {
+                                albumId: props.id,
+                                title: props.title,
+                                photos: photos,
+                                user: user,
+                                albums: props.albums
+                            }
+                            }}
+                        >
+                        {props.title}
+                        </Link>
+                    </td>
+                    <td>
+                        <Link to={{
+                            pathname: url2,
+                            state: {
+                                user: user,
+                                albums: props.albums,
+                                photos: photos
+                            }
+                            }}
+                        >
+                        {user.name}
+                        </Link>
+                    </td>
                 </tr>
             
         ) 

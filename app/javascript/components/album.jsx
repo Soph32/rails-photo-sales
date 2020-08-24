@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import Pagination from './pagination';
 
 export default function Album(props) {
     const [album, setAlbum] = useState();
     const [albums, setAlbums] = useState();
     const [photos, setPhotos] = useState();
     const [user, setUser] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
 
     let albumId;
     let title;
@@ -60,9 +63,13 @@ export default function Album(props) {
         url2 = "/users/" + user.id;
     }
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
     let photoList = [];
     if(photos) {
-        photos.forEach(e => {            
+        const currentItems = photos.slice(indexOfFirstItem, indexOfLastItem);
+        currentItems.forEach(e => {            
             photoList.push(
                 <Photos 
                     title={e.title} 
@@ -72,6 +79,8 @@ export default function Album(props) {
             )
         });
     }
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     
     if(user) {
         return (
@@ -99,6 +108,7 @@ export default function Album(props) {
                 <div className="photosList">
                     {photoList}
                 </div>
+                <Pagination paginate={paginate} totalItems={photos.length} itemsPerPage={itemsPerPage}/>
             </div>
         )
     } else {

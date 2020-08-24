@@ -29,6 +29,19 @@ table {
     text-align: center;
 }
 
+button {
+    width: 2rem;
+    height: 2rem;
+    float: left;
+    border: 1px solid rgb(3, 53, 99);
+    background: none;
+    color: rgb(3, 53, 99);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 th {
     color: rgb(3, 53, 99);
     padding: 1rem;
@@ -41,6 +54,13 @@ a {
 
 a:hover {
     color: rgb(236, 162, 0);
+}
+
+.pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mainTitle {

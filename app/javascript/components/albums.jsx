@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Album from './album';
 import User from './user';
+import Pagination from './pagination';
 
 export default function App() {
     return(
@@ -28,6 +29,8 @@ function Albums() {
 
 function AlbumsTable() {
     const [albums, setAlbums] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
 
     useEffect(() => {
         // get albums data on component load/change
@@ -36,10 +39,14 @@ function AlbumsTable() {
             .then(data => setAlbums(data));
     }, []);
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
     // for each album object generate a table row with the relevant data
     let rows = [];
     if(albums) {
-        albums.forEach(element => {            
+        const currentItems = albums.slice(indexOfFirstItem, indexOfLastItem);
+        currentItems.forEach(element => {  
             rows.push(
                 <AlbumsRow 
                     title={element.title} 
@@ -52,20 +59,27 @@ function AlbumsTable() {
         });
     };
 
-    return (
-        <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Thumbnail</th>
-                        <th>Title</th>
-                        <th>Owner</th>
-                    </tr>
-                    {rows}
-                </tbody>
-            </table>
-        </div>
-    )
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    if(albums) {
+        return (
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Thumbnail</th>
+                            <th>Title</th>
+                            <th>Owner</th>
+                        </tr>
+                        {rows}
+                    </tbody>
+                </table>
+                <Pagination paginate={paginate} totalItems={albums.length} itemsPerPage={itemsPerPage}/>
+            </div>
+        )
+    } else {
+        return null
+    }
 };
 
 function AlbumsRow(props) {

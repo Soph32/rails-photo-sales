@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Album(props) {
     const [album, setAlbum] = useState();
+    const [albums, setAlbums] = useState();
     const [photos, setPhotos] = useState();
     const [user, setUser] = useState();
 
@@ -34,6 +35,12 @@ export default function Album(props) {
         } else {
             setPhotos(props.location.state.photos);
             setUser(props.location.state.user);
+        }
+
+        if(albumId) {
+            fetch("http://localhost:3000/albums/request_albums")
+                .then(response => response.json())
+                .then(data => setAlbums(data));
         }
     }, []);
 
@@ -74,7 +81,8 @@ export default function Album(props) {
                     pathname: url2,
                     state: {
                         user: user,
-                        albums: props.albums
+                        albums: albums,
+                        photos: photos
                     }
                     }}
                 >   

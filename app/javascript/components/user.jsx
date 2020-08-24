@@ -48,28 +48,43 @@ export default function User(props) {
 
     if(user) {
         return (
-            <div>
+            <div className="userPage">
                 <div>
-                    <h1>{user.name}</h1>
-                    <p>ID: {user.id}</p>
-                    <p>Username: {user.username}</p>
-                    <p>Email: {user.email}</p>
-                    <p>Address:</p>
-                        <p>Street: {user.address.street}</p>
-                        <p>Suite: {user.address.suite}</p>
-                        <p>City: {user.address.city}</p>
-                        <p>Zipcode: {user.address.zipcode}</p>
-                        <p>Geo:</p>
-                            <p>Lat: {user.address.geo.lat}</p>
-                            <p>Lng: {user.address.geo.lng}</p>
-                    <p>Phone: {user.phone}</p>
-                    <p>Website: <a href={website}>{user.website}</a></p>
-                    <p>Company:</p>
-                        <p>Name: {user.company.name}</p>
-                        <p>Catch Phrase: {user.company.catchPhrase}</p>
-                        <p>BS: {user.company.bs}</p>
+                    <h1 className="mainTitle">{user.name}</h1>
+                    <div className="idUser">
+                        <div className="id">
+                            ID: {user.id}
+                        </div>
+                        <div className="username">
+                            Username: {user.username}
+                        </div>
+                    </div>
+                    <div className="userDetails">
+                        <div className="contactDetails">
+                            <br/><span className="heading">Contact details:</span><br/>
+                            Email: {user.email}<br/>
+                            Phone: {user.phone}<br />
+                            Website: <a href={website}>{user.website}</a>
+                        </div>
+                        <div className="address">
+                            <span className="heading">Address:</span><br/>
+                            Street: {user.address.street}<br/>
+                            Suite: {user.address.suite}<br/>
+                            City: {user.address.city}<br/>
+                            Zipcode: {user.address.zipcode}<br/>
+                            Lat: {user.address.geo.lat}<br/>
+                            Lng: {user.address.geo.lng}
+                        </div>
+                        <div className="company">
+                            <span className="heading">Company:</span><br/>
+                            Name: {user.company.name}<br/>
+                            Catch Phrase: {user.company.catchPhrase}<br/>
+                            BS: {user.company.bs}
+                        </div>
+                    </div>
                 </div>
-                <div>
+                <div className="albums">
+                    <h2>Albums</h2>
                     {userAlbums}
                 </div>
             </div>
@@ -106,7 +121,7 @@ function AlbumLinks(props) {
                 }
                 }}
             > 
-                <div>{props.albumTitle}</div><br />
+                <div className="album">{props.albumTitle}</div><br />
             </Link>
         </div>
     )

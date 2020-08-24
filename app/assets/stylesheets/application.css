@@ -13,3 +13,41 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+    color: rgb(3, 53, 99);
+}
+
+table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+th {
+    color: rgb(3, 53, 99);
+    padding: 1rem;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(236, 162, 0);
+}
+
+.mainTitle {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.thumbnails {
+    width: 5rem;
+}

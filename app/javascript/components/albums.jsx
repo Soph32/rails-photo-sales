@@ -20,7 +20,7 @@ export default function App() {
 function Albums() {
     return (
         <div>
-            <h1> Photography Album Selling Company </h1>
+            <h1 className="mainTitle"> Photography Album Selling Company </h1>
             <AlbumsTable />
         </div>
     )
@@ -89,7 +89,7 @@ function AlbumsRow(props) {
     if (photos && user) {
         return (
                 <tr>
-                    <td><img src={photos[0].thumbnailUrl}></img></td>
+                    <td><img src={photos[0].thumbnailUrl} className="thumbnails"></img></td>
                     <td>
                         <Link to={{
                             pathname: url,

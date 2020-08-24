@@ -76,23 +76,27 @@ export default function Album(props) {
     if(user) {
         return (
             <div>
-                <h1>Album {albumId} - {title}</h1>
-                <Link to={{
-                    pathname: url2,
-                    state: {
-                        user: user,
-                        albums: albums,
-                        photos: photos
-                    }
-                    }}
-                >   
-                    <h3>By {user.name}</h3>
-                </Link>
-                <p>Email: {user.email}</p>
-                <p>Phone: {user.phone}</p>
-                <p>Website: <a href={website}>{user.website}</a></p>
-
-                <div>
+                <div className="albumTitle">
+                    <h1>Album {albumId}</h1>
+                    <h1>{title}</h1>
+                    <Link to={{
+                        pathname: url2,
+                        state: {
+                            user: user,
+                            albums: albums,
+                            photos: photos
+                        }
+                        }}
+                    >   
+                        <h3 className="user">By {user.name}</h3>
+                    </Link>
+                </div>
+                <div className="contact">
+                    <p>Email: {user.email}</p>
+                    <p>Phone: {user.phone}</p>
+                    <p>Website: <a href={website}>{user.website}</a></p>
+                </div>
+                <div className="photosList">
                     {photoList}
                 </div>
             </div>
@@ -105,8 +109,8 @@ export default function Album(props) {
 function Photos(props) {
     return (
         <div>
-            <p>{props.title}</p>
-            <img src={props.url}></img>
+            <p className="photoTitles">{props.title}</p>
+            <img className="photosFull" src={props.url}></img>
         </div>
     )
 }

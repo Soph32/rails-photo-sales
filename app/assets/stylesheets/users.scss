@@ -1,3 +1,68 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+h2 {
+    color: rgb(3, 53, 99);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.albums {
+    margin-top: -3rem;
+}
+
+.userPage {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.id,
+.username {
+    float: left;
+}
+
+.idUser {
+    margin-top: -1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.username {
+    margin-left: 1rem;
+}
+
+.heading {
+    color: rgb(3, 53, 99);
+    font-weight: bold;
+    font-size: large;
+}
+
+.contactDetails,
+.address,
+.company {
+    float: left;
+    padding: 5rem;
+}
+
+.company {
+    margin-top: -3rem;
+}
+
+.contactDetails {
+    margin-top: -4rem;
+}
+
+.userDetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -2rem;
+}
+
+.album {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

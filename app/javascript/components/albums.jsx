@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Album from './album';
+import User from './user';
 
 export default function App() {
     return(
@@ -8,6 +9,7 @@ export default function App() {
             <Router>
                 <Switch>
                     <Route path="/albums/" component={Album} />
+                    <Route path="/users/" component={User} />
                     <Route path="/" component={Albums} />
                 </Switch>
             </Router>
@@ -44,6 +46,7 @@ function AlbumsTable() {
                     owner={element.userId} 
                     id={element.id} 
                     key={element.id}
+                    albums={albums}
                 />
             )
         });
@@ -82,24 +85,37 @@ function AlbumsRow(props) {
     }, []);
 
     let url = "/albums/" + props.id;
+    let url2 = "/users/" + props.owner;
     if (photos && user) {
         return (
-            <Link to={{
-                pathname: url,
-                state: {
-                    albumId: props.id,
-                    title: props.title,
-                    photos: photos,
-                    user: user
-                }
-            }}
-            >
                 <tr>
-                    <td><img src={photos[0].thumbnailUrl}></img></td>
-                    <td>{props.title}</td>
-                    <td>{user.name}</td>
+                    <Link to={{
+                        pathname: url,
+                        state: {
+                            albumId: props.id,
+                            title: props.title,
+                            photos: photos,
+                            user: user,
+                            albums: props.albums
+                        }
+                        }}
+                    >
+                        <td><img src={photos[0].thumbnailUrl}></img></td>
+                        <td>{props.title}</td>
+                    </Link>
+                    <Link to={{
+                        pathname: url2,
+                        state: {
+                            user: user,
+                            albums: props.albums,
+                            photos: photos
+                        }
+                        }}
+                    >
+                        <td>{user.name}</td>
+                    </Link>
                 </tr>
-            </Link>
+            
         ) 
     } else {
         return null
